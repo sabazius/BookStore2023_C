@@ -16,7 +16,12 @@ namespace BookStore_C
                 .AddSingleton<IAuthorRepository, AuthorRepository>();
             builder.Services
                 .AddSingleton<IAuthorService, AuthorService>();
-
+            builder.Services
+                .AddSingleton<IBookRepository, BookRepository>();
+            builder.Services
+                .AddSingleton<IBookService, BookService>();
+            builder.Services
+                .AddSingleton<ILibraryService, LibraryService>();
 
 
             builder.Services.AddControllers();
