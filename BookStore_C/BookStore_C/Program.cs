@@ -2,6 +2,9 @@ using BookStore_C.BL.Interfaces;
 using BookStore_C.BL.Services;
 using BookStore_C.DL.Interfaces;
 using BookStore_C.DL.Repositories;
+using BookStore_C.HealthChecks;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace BookStore_C
 {
@@ -29,6 +32,14 @@ namespace BookStore_C
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services
+                .AddFluentValidationAutoValidation();
+            builder.Services
+                .AddValidatorsFromAssemblyContaining(typeof(Program));
+            
+            builder.Services.AddHealthChecks()
+                .AddCheck<CustomHealthCheck>(nameof(CustomHealthCheck));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -42,6 +53,7 @@ namespace BookStore_C
 
             app.UseAuthorization();
 
+            app.MapHealthChecks("/healthz");
 
             app.MapControllers();
 
