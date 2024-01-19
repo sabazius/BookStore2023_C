@@ -26,5 +26,12 @@ namespace BookStore_C.Controllers
                 .GetAllBooksByAuthorAfterDate(request);
         }
 
+        [HttpPost("TestEndpoint")]
+        public string TestEndpoint([FromBody] 
+            TestRequest request)
+        {
+            return "Ok";
+        }
+
     }
 }
