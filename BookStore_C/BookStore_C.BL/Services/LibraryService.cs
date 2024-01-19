@@ -40,5 +40,14 @@ namespace BookStore_C.BL.Services
 
             return result;
         }
+
+        public int GetAllBooksCount(int inputCount, int authorId)
+        {
+            if (inputCount <= 0) return 0;
+
+            var result = _bookService.GetAllBooksByAuthor(authorId);
+
+            return result.Count + inputCount;
+        }
     }
 }
